@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>402</width>
-    <height>438</height>
+    <width>401</width>
+    <height>532</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>9</x>
       <y>9</y>
       <width>381</width>
-      <height>321</height>
+      <height>431</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -29,20 +29,23 @@
        <property name="title">
         <string>CPU 1</string>
        </property>
-       <widget class="QWidget" name="horizontalLayoutWidget">
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+       <widget class="QWidget" name="gridLayoutWidget">
         <property name="geometry">
          <rect>
-          <x>9</x>
-          <y>19</y>
+          <x>10</x>
+          <y>20</y>
           <width>361</width>
-          <height>31</height>
+          <height>71</height>
          </rect>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_1">
-         <item>
-          <widget class="QPushButton" name="pushButton_1">
+        <layout class="QGridLayout" name="gridLayout_1">
+         <item row="0" column="0">
+          <widget class="QPushButton" name="pushButton_1_1">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -54,12 +57,18 @@
             </size>
            </property>
            <property name="text">
-            <string>1</string>
+            <string>1.1</string>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_2">
+         <item row="0" column="1">
+          <widget class="QPushButton" name="pushButton_2_1">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="maximumSize">
             <size>
              <width>30</width>
@@ -67,12 +76,18 @@
             </size>
            </property>
            <property name="text">
-            <string>2</string>
+            <string>2.1</string>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_3">
+         <item row="1" column="1">
+          <widget class="QPushButton" name="pushButton_2_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="maximumSize">
             <size>
              <width>30</width>
@@ -80,12 +95,18 @@
             </size>
            </property>
            <property name="text">
-            <string>3</string>
+            <string>2.2</string>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_4">
+         <item row="0" column="2">
+          <widget class="QPushButton" name="pushButton_3_1">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="maximumSize">
             <size>
              <width>30</width>
@@ -93,85 +114,7 @@
             </size>
            </property>
            <property name="text">
-            <string>4</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_5">
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>5</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_6">
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>6</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_7">
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>7</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_8">
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>8</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_9">
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>9</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButton_10">
-           <property name="maximumSize">
-            <size>
-             <width>30</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>10</string>
+            <string>3.1</string>
            </property>
           </widget>
          </item>
@@ -184,52 +127,55 @@
        <property name="title">
         <string>CPU 2</string>
        </property>
-       <widget class="QWidget" name="horizontalLayoutWidget_4">
+       <widget class="QWidget" name="gridLayoutWidget_5">
         <property name="geometry">
          <rect>
           <x>10</x>
           <y>20</y>
           <width>361</width>
-          <height>31</height>
+          <height>71</height>
          </rect>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2"/>
-       </widget>
-      </widget>
-     </item>
-     <item>
-      <widget class="QGroupBox" name="groupBox_4">
-       <property name="title">
-        <string>CPU 3</string>
-       </property>
-       <widget class="QWidget" name="horizontalLayoutWidget_5">
-        <property name="geometry">
-         <rect>
-          <x>9</x>
-          <y>20</y>
-          <width>361</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_3"/>
+        <layout class="QGridLayout" name="gridLayout_2"/>
        </widget>
       </widget>
      </item>
      <item>
       <widget class="QGroupBox" name="groupBox_3">
        <property name="title">
-        <string>CPU 4</string>
+        <string>CPU3</string>
        </property>
-       <widget class="QWidget" name="horizontalLayoutWidget_2">
+       <widget class="QWidget" name="gridLayoutWidget_3">
         <property name="geometry">
          <rect>
           <x>10</x>
           <y>20</y>
           <width>361</width>
-          <height>31</height>
+          <height>71</height>
          </rect>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_4"/>
+        <layout class="QGridLayout" name="gridLayout_3"/>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_4">
+       <property name="title">
+        <string>CPU4</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+       <widget class="QWidget" name="gridLayoutWidget_4">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>361</width>
+          <height>71</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_4"/>
        </widget>
       </widget>
      </item>
@@ -238,14 +184,47 @@
    <widget class="QPushButton" name="pushButton_start">
     <property name="geometry">
      <rect>
-      <x>14</x>
-      <y>342</y>
-      <width>101</width>
-      <height>41</height>
+      <x>90</x>
+      <y>450</y>
+      <width>261</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>Start</string>
+    </property>
+   </widget>
+   <widget class="QDoubleSpinBox" name="doubleSpinBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>450</y>
+      <width>71</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>439</y>
+      <width>21</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>36</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>•</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
   </widget>
@@ -254,7 +233,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>402</width>
+     <width>401</width>
      <height>21</height>
     </rect>
    </property>
