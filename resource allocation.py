@@ -4,12 +4,15 @@ from main_window import Ui_MainWindow
 from multiprocessing import Process
 import random
 import time
+from itertools import *
 
 
 def distribution_of_tasks(task_mas):
     if task_mas is not None:
         for number in range(len(task_mas)):
-            if task_mas[number] == 1:
+            if task_mas[number] == 0:
+                continue
+            elif task_mas[number] == 1:
                 factorial(1)
             elif task_mas[number] == 2:
                 factorial(2)
@@ -95,6 +98,98 @@ def start_wave(current_wave):
     cpu4.join()
 
 
+def start_wave_for_options(criterion):
+    task_mas1 = [[0], [0, 0], [0]]
+    task_mas2 = [[0], [0, 0], [0]]
+    task_mas3 = [[0], [0, 0], [0]]
+    task_mas4 = [[0], [0, 0], [0]]
+    for wave1 in (permutations([1, 0, 0, 0])):
+        task_mas1[0][0] = wave1[0]
+        task_mas2[0][0] = wave1[1]
+        task_mas3[0][0] = wave1[2]
+        task_mas4[0][0] = wave1[3]
+        for wave21 in set(permutations([2, 0, 0, 0])):
+            task_mas1[1][0] = wave21[0]
+            task_mas2[1][0] = wave21[1]
+            task_mas3[1][0] = wave21[2]
+            task_mas4[1][0] = wave21[3]
+            for wave22 in set(permutations([3, 0, 0, 0])):
+                task_mas1[1][1] = wave22[0]
+                task_mas2[1][1] = wave22[1]
+                task_mas3[1][1] = wave22[2]
+                task_mas4[1][1] = wave22[3]
+                for wave31 in set(permutations([4, 0, 0, 0])):
+                    task_mas1[2][0] = wave31[0]
+                    task_mas2[2][0] = wave31[1]
+                    task_mas3[2][0] = wave31[2]
+                    task_mas4[2][0] = wave31[3]
+
+                    timer = time.time()
+
+                    cpu1 = Process(target=distribution_of_tasks, name="CPU1", args=(task_mas1[0],))
+                    cpu2 = Process(target=distribution_of_tasks, name="CPU2", args=(task_mas2[0],))
+                    cpu3 = Process(target=distribution_of_tasks, name="CPU3", args=(task_mas3[0],))
+                    cpu4 = Process(target=distribution_of_tasks, name="CPU4", args=(task_mas4[0],))
+                    cpu1.start()
+                    cpu2.start()
+                    cpu3.start()
+                    cpu4.start()
+                    cpu1.join()
+                    cpu2.join()
+                    cpu3.join()
+                    cpu4.join()
+
+                    cpu1 = Process(target=distribution_of_tasks, name="CPU1", args=(task_mas1[1],))
+                    cpu2 = Process(target=distribution_of_tasks, name="CPU2", args=(task_mas2[1],))
+                    cpu3 = Process(target=distribution_of_tasks, name="CPU3", args=(task_mas3[1],))
+                    cpu4 = Process(target=distribution_of_tasks, name="CPU4", args=(task_mas4[1],))
+                    cpu1.start()
+                    cpu2.start()
+                    cpu3.start()
+                    cpu4.start()
+                    cpu1.join()
+                    cpu2.join()
+                    cpu3.join()
+                    cpu4.join()
+
+                    cpu1 = Process(target=distribution_of_tasks, name="CPU1", args=(task_mas1[2],))
+                    cpu2 = Process(target=distribution_of_tasks, name="CPU2", args=(task_mas2[2],))
+                    cpu3 = Process(target=distribution_of_tasks, name="CPU3", args=(task_mas3[2],))
+                    cpu4 = Process(target=distribution_of_tasks, name="CPU4", args=(task_mas4[2],))
+                    cpu1.start()
+                    cpu2.start()
+                    cpu3.start()
+                    cpu4.start()
+                    cpu1.join()
+                    cpu2.join()
+                    cpu3.join()
+                    cpu4.join()
+
+                    finish_timer = time.time() - timer
+
+                    if finish_timer > criterion:
+                        print("TOO LONG %s seconds" % finish_timer)
+                    else:
+                        print("CPU1 (first wave):", task_mas1[0], end='   ')
+                        print("CPU1 (second wave):", task_mas1[1], end='   ')
+                        print("CPU1 (third wave):", task_mas1[2])
+
+                        print("CPU2 (first wave):", task_mas2[0], end='   ')
+                        print("CPU2 (second wave):", task_mas2[1], end='   ')
+                        print("CPU2 (third wave):", task_mas2[2])
+
+                        print("CPU3 (first wave):", task_mas3[0], end='   ')
+                        print("CPU3 (second wave):", task_mas3[1], end='   ')
+                        print("CPU3 (third wave):", task_mas3[2])
+
+                        print("CPU4 (first wave):", task_mas4[0], end='   ')
+                        print("CPU4 (second wave):", task_mas4[1], end='   ')
+                        print("CPU4 (third wave):", task_mas4[2])
+
+                        print("%s seconds" % finish_timer)
+                        print()
+
+
 def factorial(n):
     n *= 10000
     number = 1
@@ -104,7 +199,7 @@ def factorial(n):
 
 
 def start_test():
-    x = ui.doubleSpinBox.value()
+    criterion = ui.doubleSpinBox.value()
     print("\n" * 80)
     timer = time.time()
     current_wave = [1]
@@ -115,10 +210,16 @@ def start_test():
     start_wave(current_wave)
     finish_timer = time.time() - timer
     print("%s seconds" % finish_timer)
-    if finish_timer > x:
+    if finish_timer > criterion:
         ui.label.setStyleSheet('color: rgb(255, 0, 0);')
     else:
         ui.label.setStyleSheet('color: rgb(0, 255, 0);')
+
+
+def searching_for_options():
+    criterion = ui.doubleSpinBox_2.value()
+    print("\n" * 80)
+    start_wave_for_options(criterion)
 
 
 if __name__ == '__main__':
@@ -130,5 +231,6 @@ if __name__ == '__main__':
     # Начало кода
 
     ui.pushButton_start.clicked.connect(start_test)
+    ui.pushButton_search.clicked.connect(searching_for_options)
     #Конец кода
     sys.exit(app.exec_())
