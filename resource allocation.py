@@ -6,6 +6,11 @@ import random
 import time
 from itertools import *
 
+from graph_construction import plot
+
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+import matplotlib.pyplot as plt
+
 
 def distribution_of_tasks(task_mas):
     if task_mas is not None:
@@ -221,6 +226,15 @@ def searching_for_options():
     print("\n" * 80)
     start_wave_for_options(criterion)
 
+def start_canvas():
+    ui.figure = plt.figure()
+    ui.canvas = FigureCanvas(ui.figure)
+    if ui.verticalLayout_graph.count() > 0:
+        ui.verticalLayout_graph.takeAt(0)
+        plt.cla()
+    ui.verticalLayout_graph.addWidget(ui.canvas)
+    plot(ui.spinBox_count_of_tasks.value(), ui.doubleSpinBox_connection_probability.value())
+
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
@@ -232,5 +246,6 @@ if __name__ == '__main__':
 
     ui.pushButton_start.clicked.connect(start_test)
     ui.pushButton_search.clicked.connect(searching_for_options)
+    ui.pushButton.clicked.connect(start_canvas)
     #Конец кода
     sys.exit(app.exec_())
