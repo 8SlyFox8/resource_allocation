@@ -1,109 +1,18 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 from main_window import Ui_MainWindow
-from multiprocessing import Process
-import random
-import time
-from itertools import *
-
-from graph_construction import plot
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
+from multiprocessing import Process, Manager
+import random
+import time
+
+from graph_construction import plot
+from tasks import factorial
 
 
-def distribution_of_tasks(task_mas):
-    if task_mas is not None:
-        for number in range(len(task_mas)):
-            if task_mas[number] == 0:
-                continue
-            elif task_mas[number] == 1:
-                factorial(1)
-            elif task_mas[number] == 2:
-                factorial(2)
-            elif task_mas[number] == 3:
-                factorial(3)
-            else:
-                factorial(4)
-
-
-def start_wave(current_wave):
-    wave = current_wave
-    task_mas1 = []
-    task_mas2 = []
-    task_mas3 = []
-    task_mas4 = []
-    random.shuffle(wave)
-    for number in range(len(wave)):
-        dice = random.randint(1, 4)
-        if dice == 1:
-            task_mas1.append(wave[number])
-        elif dice == 2:
-            task_mas2.append(wave[number])
-        elif dice == 3:
-            task_mas3.append(wave[number])
-        else:
-            task_mas4.append(wave[number])
-
-    if task_mas1 is not None:
-        for number in range(len(task_mas1)):
-            if task_mas1[number] == 1:
-                ui.gridLayout_1.addWidget(ui.pushButton_1_1, 0, 0)
-            elif task_mas1[number] == 2:
-                ui.gridLayout_1.addWidget(ui.pushButton_2_1, 0, 1)
-            elif task_mas1[number] == 3:
-                ui.gridLayout_1.addWidget(ui.pushButton_2_2, 1, 1)
-            elif task_mas1[number] == 4:
-                ui.gridLayout_1.addWidget(ui.pushButton_3_1, 0, 2)
-
-    if task_mas2 is not None:
-        for number in range(len(task_mas2)):
-            if task_mas2[number] == 1:
-                ui.gridLayout_2.addWidget(ui.pushButton_1_1, 0, 0)
-            elif task_mas2[number] == 2:
-                ui.gridLayout_2.addWidget(ui.pushButton_2_1, 0, 1)
-            elif task_mas2[number] == 3:
-                ui.gridLayout_2.addWidget(ui.pushButton_2_2, 1, 1)
-            elif task_mas2[number] == 4:
-                ui.gridLayout_2.addWidget(ui.pushButton_3_1, 0, 2)
-
-    if task_mas3 is not None:
-        for number in range(len(task_mas3)):
-            if task_mas3[number] == 1:
-                ui.gridLayout_3.addWidget(ui.pushButton_1_1, 0, 0)
-            elif task_mas3[number] == 2:
-                ui.gridLayout_3.addWidget(ui.pushButton_2_1, 0, 1)
-            elif task_mas3[number] == 3:
-                ui.gridLayout_3.addWidget(ui.pushButton_2_2, 1, 1)
-            elif task_mas3[number] == 4:
-                ui.gridLayout_3.addWidget(ui.pushButton_3_1, 0, 2)
-
-    if task_mas4 is not None:
-        for number in range(len(task_mas4)):
-            if task_mas4[number] == 1:
-                ui.gridLayout_4.addWidget(ui.pushButton_1_1, 0, 0)
-            elif task_mas4[number] == 2:
-                ui.gridLayout_4.addWidget(ui.pushButton_2_1, 0, 1)
-            elif task_mas4[number] == 3:
-                ui.gridLayout_4.addWidget(ui.pushButton_2_2, 1, 1)
-            elif task_mas4[number] == 4:
-                ui.gridLayout_4.addWidget(ui.pushButton_3_1, 0, 2)
-
-    cpu1 = Process(target=distribution_of_tasks, name="CPU1", args=(task_mas1,))
-    cpu2 = Process(target=distribution_of_tasks, name="CPU2", args=(task_mas2,))
-    cpu3 = Process(target=distribution_of_tasks, name="CPU3", args=(task_mas3,))
-    cpu4 = Process(target=distribution_of_tasks, name="CPU4", args=(task_mas4,))
-    cpu1.start()
-    cpu2.start()
-    cpu3.start()
-    cpu4.start()
-    cpu1.join()
-    cpu2.join()
-    cpu3.join()
-    cpu4.join()
-
-
-def start_wave_for_options(criterion):
+"""def start_wave_for_options(criterion):
     task_mas1 = [[0], [0, 0], [0]]
     task_mas2 = [[0], [0, 0], [0]]
     task_mas3 = [[0], [0, 0], [0]]
@@ -192,18 +101,10 @@ def start_wave_for_options(criterion):
                         print("CPU4 (third wave):", task_mas4[2])
 
                         print("%s seconds" % finish_timer)
-                        print()
+                        print()"""
 
 
-def factorial(n):
-    n *= 10000
-    number = 1
-    while n > 1:
-        number *= n
-        n -= 1
-
-
-def start_test():
+"""def start_test():
     criterion = ui.doubleSpinBox.value()
     print("\n" * 80)
     timer = time.time()
@@ -218,22 +119,149 @@ def start_test():
     if finish_timer > criterion:
         ui.label.setStyleSheet('color: rgb(255, 0, 0);')
     else:
-        ui.label.setStyleSheet('color: rgb(0, 255, 0);')
+        ui.label.setStyleSheet('color: rgb(0, 255, 0);')"""
+
+def task_completion(task_mas, link_list):
+    if task_mas != {}:
+        for key in task_mas:
+            exitflag = False
+            while exitflag != True:
+                exitflag = False
+                for number_in_matrix in link_list:
+                    if number_in_matrix[1] == key:
+                        exitflag = False
+                        break
+                else:
+                    exitflag = True
+
+            if task_mas[key] == 1:
+                factorial(1)
+            elif task_mas[key] == 2:
+                factorial(2)
+            elif task_mas[key] == 3:
+                factorial(3)
+            elif task_mas[key] == 4:
+                factorial(4)
+            elif task_mas[key] == 5:
+                factorial(5)
+            elif task_mas[key] == 6:
+                factorial(6)
+            elif task_mas[key] == 7:
+                factorial(7)
+            elif task_mas[key] == 8:
+                factorial(8)
+            elif task_mas[key] == 9:
+                factorial(9)
+            else:
+                factorial(10)
+
+            exitflag = False
+            while exitflag != True:
+                exitflag = False
+                for number_in_matrix in link_list:
+                    if number_in_matrix[0] == key:
+                        link_list.remove(number_in_matrix)
+                        exitflag = False
+                        break
+                else:
+                    exitflag = True
+
+
+def processor_operation(task_mas1, task_mas2, task_mas3, task_mas4):
+    link_matrix_searching_for_options = Manager().list(global_connection)
+    timer = time.time()
+    cpu1 = Process(target=task_completion, name="CPU1", args=(task_mas1, link_matrix_searching_for_options,))
+    cpu2 = Process(target=task_completion, name="CPU2", args=(task_mas2, link_matrix_searching_for_options,))
+    cpu3 = Process(target=task_completion, name="CPU3", args=(task_mas3, link_matrix_searching_for_options,))
+    cpu4 = Process(target=task_completion, name="CPU4", args=(task_mas4, link_matrix_searching_for_options,))
+    cpu1.start()
+    cpu2.start()
+    cpu3.start()
+    cpu4.start()
+    cpu1.join()
+    cpu2.join()
+    cpu3.join()
+    cpu4.join()
+    finish_timer = time.time() - timer
+    print("CPU1", task_mas1)
+    print("CPU2", task_mas2)
+    print("CPU3", task_mas3)
+    print("CPU4", task_mas4)
+    print("%s seconds" % finish_timer)
+
+
+def scientific_poke_method():
+    print("\n" * 80)
+    task_mas1 = {}
+    task_mas2 = {}
+    task_mas3 = {}
+    task_mas4 = {}
+    labels = global_labels
+    for number in range(len(labels)):
+        dice = random.randint(1, 4)
+        if dice == 1:
+            task_mas1[number] = labels[number]
+        elif dice == 2:
+            task_mas2[number] = labels[number]
+        elif dice == 3:
+            task_mas3[number] = labels[number]
+        else:
+            task_mas4[number] = labels[number]
+    task_mas1 = {0: 2, 1: 3, 3: 5}
+    task_mas2 = {2: 2}
+    task_mas3 = {4: 9}
+    task_mas4 = {}
+    processor_operation(task_mas1, task_mas2, task_mas3, task_mas4)
+    ui.label_1.setStyleSheet('color: rgb(0, 255, 0);')
+    ui.label_2.setStyleSheet('color: rgb(255, 0, 0);')
 
 
 def searching_for_options():
-    criterion = ui.doubleSpinBox_2.value()
     print("\n" * 80)
-    start_wave_for_options(criterion)
+    task_mas1 = {}
+    task_mas2 = {}
+    task_mas3 = {}
+    task_mas4 = {}
+    labels = global_labels
+    enumeration(0, labels, task_mas1, task_mas2, task_mas3, task_mas4)
+    ui.label_1.setStyleSheet('color: rgb(255, 0, 0);')
+    ui.label_2.setStyleSheet('color: rgb(0, 255, 0);')
+
+
+def enumeration(communication_number, labels, task_mas1, task_mas2, task_mas3, task_mas4):
+    for index in range(4):
+        if index == 0:
+            task_mas1[communication_number] = labels[communication_number]
+        elif index == 1:
+            task_mas2[communication_number] = labels[communication_number]
+        elif index == 2:
+            task_mas3[communication_number] = labels[communication_number]
+        else:
+            task_mas4[communication_number] = labels[communication_number]
+        if communication_number < len(labels) - 1:
+            enumeration(communication_number + 1, labels, task_mas1, task_mas2, task_mas3, task_mas4)
+        else:
+            processor_operation(task_mas1, task_mas2, task_mas3, task_mas4)
+        if index == 0:
+            task_mas1.pop(communication_number)
+        elif index == 1:
+            task_mas2.pop(communication_number)
+        elif index == 2:
+            task_mas3.pop(communication_number)
+        else:
+            task_mas4.pop(communication_number)
+
 
 def start_canvas():
+    global global_labels, global_connection
     ui.figure = plt.figure()
     ui.canvas = FigureCanvas(ui.figure)
     if ui.verticalLayout_graph.count() > 0:
         ui.verticalLayout_graph.takeAt(0)
         plt.cla()
     ui.verticalLayout_graph.addWidget(ui.canvas)
-    plot(ui.spinBox_count_of_tasks.value(), ui.doubleSpinBox_connection_probability.value())
+    global_labels, global_connection = plot(ui.spinBox_count_of_tasks.value(),
+                                            ui.doubleSpinBox_connection_probability.value())
 
 
 if __name__ == '__main__':
@@ -244,8 +272,8 @@ if __name__ == '__main__':
     MainWindow.show()
     # Начало кода
 
-    ui.pushButton_start.clicked.connect(start_test)
-    ui.pushButton_search.clicked.connect(searching_for_options)
+    ui.pushButton_poke.clicked.connect(scientific_poke_method)
+    ui.pushButton_options.clicked.connect(searching_for_options)
     ui.pushButton.clicked.connect(start_canvas)
     #Конец кода
     sys.exit(app.exec_())
