@@ -4,74 +4,69 @@ from main_window import Ui_MainWindow
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
-from multiprocessing import Process, Manager
 import random
-import time
+import pandas as pd
+from openpyxl import load_workbook
+import xlrd
+import xlwt
+
 
 from graph_construction import plot
-from tasks import factorial
-
-
-def task_completion(task_mas, link_list):
-    if task_mas != {}:
-        for key in task_mas:
-            exitflag = False
-            while exitflag != True:
-                exitflag = False
-                for number_in_matrix in link_list:
-                    if number_in_matrix[1] == key:
-                        break
-                else:
-                    exitflag = True
-
-            if task_mas[key] == 1:
-                factorial(1)
-            elif task_mas[key] == 2:
-                factorial(2)
-            elif task_mas[key] == 3:
-                factorial(3)
-            elif task_mas[key] == 4:
-                factorial(4)
-            elif task_mas[key] == 5:
-                factorial(5)
-            elif task_mas[key] == 6:
-                factorial(6)
-            elif task_mas[key] == 7:
-                factorial(7)
-            elif task_mas[key] == 8:
-                factorial(8)
-            elif task_mas[key] == 9:
-                factorial(9)
-            else:
-                factorial(10)
-
-            save_link_list = []
-            save_link_list.extend(link_list)
-            exitflag = False
-            while exitflag != True:
-                for number_in_matrix in save_link_list:
-                    if number_in_matrix[0] == key:
-                        link_list.remove(number_in_matrix)
-                else:
-                    exitflag = True
 
 
 def processor_operation(task_mas1, task_mas2, task_mas3, task_mas4):
-    link_matrix_searching_for_options = Manager().list(global_connection)
-    timer = time.time()
-    cpu1 = Process(target=task_completion, name="CPU1", args=(task_mas1, link_matrix_searching_for_options,))
-    cpu2 = Process(target=task_completion, name="CPU2", args=(task_mas2, link_matrix_searching_for_options,))
-    cpu3 = Process(target=task_completion, name="CPU3", args=(task_mas3, link_matrix_searching_for_options,))
-    cpu4 = Process(target=task_completion, name="CPU4", args=(task_mas4, link_matrix_searching_for_options,))
-    cpu1.start()
-    cpu2.start()
-    cpu3.start()
-    cpu4.start()
-    cpu1.join()
-    cpu2.join()
-    cpu3.join()
-    cpu4.join()
-    finish_timer = time.time() - timer
+    link_list = global_connection.copy()
+    finish_timer = 0
+    time_counter = [0, 0, 0, 0]
+
+    tasks = [task_mas1.copy(), task_mas2.copy(), task_mas3.copy(), task_mas4.copy()]
+
+    exitflag1 = False
+    while exitflag1 != True:
+        counter = 0
+        del_tasks = []
+        for cpu in range(len(tasks)):
+            if tasks[cpu] != {}:
+                exitflag2 = False
+                for task in tasks[cpu]:
+                    for number_in_matrix in link_list:
+                        if number_in_matrix[1] == task:
+                            time_counter[cpu] += 1
+                            break
+                    else:
+                        exitflag2 = True
+
+                    if exitflag2 == False:
+                        break
+
+                    time_counter[cpu] += 1
+                    tasks[cpu][task] -= 1
+                    if tasks[cpu][task] == 0:
+                        del_tasks.append(task)
+                    break
+            else:
+                counter += 1
+
+        for task in del_tasks:
+            exitflag3 = False
+            while exitflag3 != True:
+                for number_in_matrix in link_list:
+                    if number_in_matrix[0] == task:
+                        link_list.remove(number_in_matrix)
+                        break
+                else:
+                    exitflag3 = True
+            for cpu in range(len(tasks)):
+                if tasks[cpu] != {}:
+                    if task in tasks[cpu]:
+                        del tasks[cpu][task]
+
+        if counter == 4:
+            exitflag1 = True
+
+    for time in time_counter:
+        if time > finish_timer:
+            finish_timer = time
     return finish_timer
 
 
@@ -94,7 +89,6 @@ def search_for_a_winner(current_time, best_time, task_mas1, task_mas2, task_mas3
 
 
 def scientific_poke_method():
-    total_timer = time.time()
     print("\n" * 80)
     task_mas1 = {}
     task_mas2 = {}
@@ -120,28 +114,31 @@ def scientific_poke_method():
     ui.label_1.setStyleSheet('color: rgb(0, 255, 0);')
     ui.label_2.setStyleSheet('color: rgb(255, 0, 0);')
     ui.label_3.setStyleSheet('color: rgb(255, 0, 0);')
-    total_timer = time.time() - total_timer
+    ui.label_4.setStyleSheet('color: rgb(255, 0, 0);')
+    total_timer = finish_timer
     print("Working hours %s seconds" % total_timer)
+    return finish_timer, total_timer
 
 
 def searching_for_options():
-    total_timer = time.time()
+    total_timer = 0
     task_mas1 = {}
     task_mas2 = {}
     task_mas3 = {}
     task_mas4 = {}
     best_time = 0
     labels = global_labels
-    best_time = enumeration(0, labels, task_mas1, task_mas2, task_mas3, task_mas4, best_time)
+    best_time, total_timer = enumeration(0, labels, task_mas1, task_mas2, task_mas3, task_mas4, best_time, total_timer)
     print("%s seconds" % best_time)
     ui.label_1.setStyleSheet('color: rgb(255, 0, 0);')
     ui.label_2.setStyleSheet('color: rgb(0, 255, 0);')
     ui.label_3.setStyleSheet('color: rgb(255, 0, 0);')
-    total_timer = time.time() - total_timer
+    ui.label_4.setStyleSheet('color: rgb(255, 0, 0);')
     print("Working hours %s seconds" % total_timer)
+    return best_time, total_timer
 
 
-def enumeration(communication_number, labels, task_mas1, task_mas2, task_mas3, task_mas4, best_time):
+def enumeration(communication_number, labels, task_mas1, task_mas2, task_mas3, task_mas4, best_time, total_timer):
     for index in range(4):
         if index == 0:
             task_mas1[communication_number] = labels[communication_number]
@@ -152,9 +149,10 @@ def enumeration(communication_number, labels, task_mas1, task_mas2, task_mas3, t
         else:
             task_mas4[communication_number] = labels[communication_number]
         if communication_number < len(labels) - 1:
-            best_time = enumeration(communication_number + 1, labels, task_mas1, task_mas2, task_mas3, task_mas4, best_time)
+            best_time, total_timer = enumeration(communication_number + 1, labels, task_mas1, task_mas2, task_mas3, task_mas4, best_time, total_timer)
         else:
             finish_timer = processor_operation(task_mas1, task_mas2, task_mas3, task_mas4)
+            total_timer += finish_timer
             best_time = search_for_a_winner(finish_timer, best_time, task_mas1, task_mas2, task_mas3, task_mas4)
         if index == 0:
             task_mas1.pop(communication_number)
@@ -164,11 +162,11 @@ def enumeration(communication_number, labels, task_mas1, task_mas2, task_mas3, t
             task_mas3.pop(communication_number)
         else:
             task_mas4.pop(communication_number)
-    return best_time
+    return best_time, total_timer
 
 
 def evolutionary_method():
-    total_timer = time.time()
+    total_timer = 0
     best_time = 0
     individuals = []
     for individual in range(ui.spinBox_number_of_individuals.value()):
@@ -179,19 +177,22 @@ def evolutionary_method():
         for individual in range(ui.spinBox_number_of_individuals.value()):
             finish_timer = processor_operation(individuals[individual][0], individuals[individual][1], individuals[individual][2], individuals[individual][3])
             results[individual] = finish_timer
+            total_timer += finish_timer
         individuals = analysis(results, individuals)
         individuals = mutation(individuals)
 
     for individual in range(ui.spinBox_number_of_individuals.value()):
         finish_timer = processor_operation(individuals[individual][0], individuals[individual][1], individuals[individual][2], individuals[individual][3])
+        total_timer += finish_timer
         best_time = search_for_a_winner(finish_timer, best_time, individuals[individual][0], individuals[individual][1], individuals[individual][2], individuals[individual][3])
-    print("%s seconds" % best_time)
 
+    print("%s seconds" % best_time)
     ui.label_1.setStyleSheet('color: rgb(255, 0, 0);')
     ui.label_2.setStyleSheet('color: rgb(255, 0, 0);')
     ui.label_3.setStyleSheet('color: rgb(0, 255, 0);')
-    total_timer = time.time() - total_timer
+    ui.label_4.setStyleSheet('color: rgb(255, 0, 0);')
     print("Working hours %s seconds" % total_timer)
+    return best_time, total_timer
 
 
 def first_gen():
@@ -215,8 +216,12 @@ def analysis(results, individuals):
     max_result = max(results.values())
     for individual in range(ui.spinBox_number_of_individuals.value()):
         all_time += max_result - results[individual]
-    for individual in range(ui.spinBox_number_of_individuals.value()):
-        results[individual] = (max_result - results[individual]) / all_time
+    if all_time == 0:
+        for individual in range(ui.spinBox_number_of_individuals.value()):
+            results[individual] = 1 / ui.spinBox_number_of_individuals.value()
+    else:
+        for individual in range(ui.spinBox_number_of_individuals.value()):
+            results[individual] = (max_result - results[individual]) / all_time
 
     new_individuals = []
     for couple in range((ui.spinBox_number_of_individuals.value() // 2) + (ui.spinBox_number_of_individuals.value() % 2)):
@@ -229,7 +234,7 @@ def analysis(results, individuals):
                     parents.append(individuals[individual])
                     break
                 else:
-                    if individual != range(ui.spinBox_number_of_individuals.value() - 1):
+                    if individual != range(ui.spinBox_number_of_individuals.value()-1):
                         dice += results[individual+1]
         if ui.spinBox_number_of_individuals.value() % 2 == 1:
             if couple == ui.spinBox_number_of_individuals.value() // 2:
@@ -292,6 +297,37 @@ def mutation(individuals):
     return new_individuals
 
 
+def full_test():
+    book = xlwt.Workbook(encoding="utf-8")
+    sheet = book.add_sheet("Full test")
+    sheet.write(0, 0, "Scientific poke method (Best time)")
+    sheet.write(0, 1, "Scientific poke method (Total time)")
+    sheet.write(0, 2, "Searching for options (Best time)")
+    sheet.write(0, 3, "Searching for options (Total time)")
+    sheet.write(0, 4, "Evolutionary method (Best time)")
+    sheet.write(0, 5, "Evolutionary method (Total time)")
+
+    for graphs in range(ui.spinBox_number_of_graphs.value()):
+        start_canvas()
+
+        best_time, total_timer = scientific_poke_method()
+        sheet.write(graphs + 1, 0, best_time)
+        sheet.write(graphs + 1, 1, total_timer)
+
+        best_time, total_timer = searching_for_options()
+        sheet.write(graphs + 1, 2, best_time)
+        sheet.write(graphs + 1, 3, total_timer)
+
+        best_time, total_timer = evolutionary_method()
+        sheet.write(graphs + 1, 4, best_time)
+        sheet.write(graphs + 1, 5, total_timer)
+    book.save("Full test.xls")
+
+    ui.label_1.setStyleSheet('color: rgb(255, 0, 0);')
+    ui.label_2.setStyleSheet('color: rgb(255, 0, 0);')
+    ui.label_3.setStyleSheet('color: rgb(255, 0, 0);')
+    ui.label_4.setStyleSheet('color: rgb(0, 255, 0);')
+
 
 def start_canvas():
     global global_labels, global_connection
@@ -317,5 +353,6 @@ if __name__ == '__main__':
     ui.pushButton_options.clicked.connect(searching_for_options)
     ui.pushButton_evolution.clicked.connect(evolutionary_method)
     ui.pushButton.clicked.connect(start_canvas)
+    ui.pushButton_full_test.clicked.connect(full_test)
     #Конец кода
     sys.exit(app.exec_())
