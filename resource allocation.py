@@ -5,11 +5,9 @@ from main_window import Ui_MainWindow
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 import random
-import pandas as pd
-from openpyxl import load_workbook
-import xlrd
+import time
 import xlwt
-
+import numpy as np
 
 from graph_construction import plot
 
@@ -90,6 +88,7 @@ def search_for_a_winner(current_time, best_time, task_mas1, task_mas2, task_mas3
 
 def scientific_poke_method():
     print("\n" * 80)
+    timer = time.time()
     task_mas1 = {}
     task_mas2 = {}
     task_mas3 = {}
@@ -106,6 +105,7 @@ def scientific_poke_method():
         else:
             task_mas4[number] = labels[number]
     finish_timer = processor_operation(task_mas1, task_mas2, task_mas3, task_mas4)
+    total_timer = time.time() - timer
     print("CPU1", task_mas1)
     print("CPU2", task_mas2)
     print("CPU3", task_mas3)
@@ -115,30 +115,33 @@ def scientific_poke_method():
     ui.label_2.setStyleSheet('color: rgb(255, 0, 0);')
     ui.label_3.setStyleSheet('color: rgb(255, 0, 0);')
     ui.label_4.setStyleSheet('color: rgb(255, 0, 0);')
-    total_timer = finish_timer
+    ui.label_5.setStyleSheet('color: rgb(255, 0, 0);')
     print("Working hours %s seconds" % total_timer)
     return finish_timer, total_timer
 
 
 def searching_for_options():
-    total_timer = 0
+    print("\n" * 80)
+    timer = time.time()
     task_mas1 = {}
     task_mas2 = {}
     task_mas3 = {}
     task_mas4 = {}
     best_time = 0
     labels = global_labels
-    best_time, total_timer = enumeration(0, labels, task_mas1, task_mas2, task_mas3, task_mas4, best_time, total_timer)
+    best_time = enumeration(0, labels, task_mas1, task_mas2, task_mas3, task_mas4, best_time)
+    total_timer = time.time() - timer
     print("%s seconds" % best_time)
     ui.label_1.setStyleSheet('color: rgb(255, 0, 0);')
     ui.label_2.setStyleSheet('color: rgb(0, 255, 0);')
     ui.label_3.setStyleSheet('color: rgb(255, 0, 0);')
     ui.label_4.setStyleSheet('color: rgb(255, 0, 0);')
+    ui.label_5.setStyleSheet('color: rgb(255, 0, 0);')
     print("Working hours %s seconds" % total_timer)
     return best_time, total_timer
 
 
-def enumeration(communication_number, labels, task_mas1, task_mas2, task_mas3, task_mas4, best_time, total_timer):
+def enumeration(communication_number, labels, task_mas1, task_mas2, task_mas3, task_mas4, best_time):
     for index in range(4):
         if index == 0:
             task_mas1[communication_number] = labels[communication_number]
@@ -149,10 +152,9 @@ def enumeration(communication_number, labels, task_mas1, task_mas2, task_mas3, t
         else:
             task_mas4[communication_number] = labels[communication_number]
         if communication_number < len(labels) - 1:
-            best_time, total_timer = enumeration(communication_number + 1, labels, task_mas1, task_mas2, task_mas3, task_mas4, best_time, total_timer)
+            best_time = enumeration(communication_number + 1, labels, task_mas1, task_mas2, task_mas3, task_mas4, best_time)
         else:
             finish_timer = processor_operation(task_mas1, task_mas2, task_mas3, task_mas4)
-            total_timer += finish_timer
             best_time = search_for_a_winner(finish_timer, best_time, task_mas1, task_mas2, task_mas3, task_mas4)
         if index == 0:
             task_mas1.pop(communication_number)
@@ -162,11 +164,13 @@ def enumeration(communication_number, labels, task_mas1, task_mas2, task_mas3, t
             task_mas3.pop(communication_number)
         else:
             task_mas4.pop(communication_number)
-    return best_time, total_timer
+
+    return best_time
 
 
-def evolutionary_method():
-    total_timer = 0
+def evolutionary_method(method):
+    print("\n" * 80)
+    timer = time.time()
     best_time = 0
     individuals = []
     for individual in range(ui.spinBox_number_of_individuals.value()):
@@ -177,20 +181,23 @@ def evolutionary_method():
         for individual in range(ui.spinBox_number_of_individuals.value()):
             finish_timer = processor_operation(individuals[individual][0], individuals[individual][1], individuals[individual][2], individuals[individual][3])
             results[individual] = finish_timer
-            total_timer += finish_timer
-        individuals = analysis(results, individuals)
+        if method == 1:
+            individuals = analysis_roulette(results, individuals)
+        else:
+            individuals = analysis_ranging(results, individuals)
         individuals = mutation(individuals)
 
     for individual in range(ui.spinBox_number_of_individuals.value()):
         finish_timer = processor_operation(individuals[individual][0], individuals[individual][1], individuals[individual][2], individuals[individual][3])
-        total_timer += finish_timer
         best_time = search_for_a_winner(finish_timer, best_time, individuals[individual][0], individuals[individual][1], individuals[individual][2], individuals[individual][3])
 
+    total_timer = time.time() - timer
     print("%s seconds" % best_time)
     ui.label_1.setStyleSheet('color: rgb(255, 0, 0);')
     ui.label_2.setStyleSheet('color: rgb(255, 0, 0);')
     ui.label_3.setStyleSheet('color: rgb(0, 255, 0);')
     ui.label_4.setStyleSheet('color: rgb(255, 0, 0);')
+    ui.label_5.setStyleSheet('color: rgb(255, 0, 0);')
     print("Working hours %s seconds" % total_timer)
     return best_time, total_timer
 
@@ -211,7 +218,8 @@ def first_gen():
     return individual
 
 
-def analysis(results, individuals):
+#Метод рулетки
+def analysis_roulette(results, individuals):
     all_time = 0
     max_result = max(results.values())
     for individual in range(ui.spinBox_number_of_individuals.value()):
@@ -236,6 +244,52 @@ def analysis(results, individuals):
                 else:
                     if individual != range(ui.spinBox_number_of_individuals.value()-1):
                         dice += results[individual+1]
+        if ui.spinBox_number_of_individuals.value() % 2 == 1:
+            if couple == ui.spinBox_number_of_individuals.value() // 2:
+                new_individuals.append(crossing(parents)[0])
+            else:
+                new_individuals.append(crossing(parents)[0])
+                new_individuals.append(crossing(parents)[1])
+        else:
+            new_individuals.append(crossing(parents)[0])
+            new_individuals.append(crossing(parents)[1])
+    return new_individuals
+
+
+#Метод ранжирования
+def analysis_ranging(results, individuals):
+    all_time = {}
+    for result in results:
+        if results[result] not in all_time.values():
+            all_time[result] = results[result]
+
+    max_result = 0
+    for rank in range(len(all_time)+1):
+        max_result += rank
+
+    new_results = {}
+    results_keys = sorted(results, key=results.get)
+    for result in results_keys:
+        new_results[result] = results[result]
+
+    save_max_result = max_result
+    rank = len(all_time)
+    for result in new_results:
+        results[result] = max_result, max_result - rank
+        if new_results[result] not in results.values():
+            max_result -= rank
+            rank -= 1
+
+    new_individuals = []
+    for couple in range((ui.spinBox_number_of_individuals.value() // 2) + (ui.spinBox_number_of_individuals.value() % 2)):
+        parents = []
+        for i in range(2):
+            dice = {}
+            a = random.randint(1, save_max_result)
+            for individual, result in results.items():
+                if (a <= result[0]) and (a > result[1]):
+                    dice[individual] = result
+            parents.append(individuals[random.choice(list(dice))])
         if ui.spinBox_number_of_individuals.value() % 2 == 1:
             if couple == ui.spinBox_number_of_individuals.value() // 2:
                 new_individuals.append(crossing(parents)[0])
@@ -297,6 +351,102 @@ def mutation(individuals):
     return new_individuals
 
 
+def annealing_method(method):
+    print("\n" * 80)
+    timer = time.time()
+    task_mas1 = {}
+    task_mas2 = {}
+    task_mas3 = {}
+    task_mas4 = {}
+    labels = global_labels
+    for number in range(len(labels)):
+        dice = random.randint(1, 4)
+        if dice == 1:
+            task_mas1[number] = labels[number]
+        elif dice == 2:
+            task_mas2[number] = labels[number]
+        elif dice == 3:
+            task_mas3[number] = labels[number]
+        else:
+            task_mas4[number] = labels[number]
+    finish_timer = processor_operation(task_mas1, task_mas2, task_mas3, task_mas4)
+
+    option = [task_mas1, task_mas2, task_mas3, task_mas4]
+
+    temperature = ui.spinBox_temperature.value()
+
+    for iterator in range(1, ui.spinBox_iteration.value()):
+
+        new_option = option_changes(option)
+        new_timer = processor_operation(new_option[0], new_option[1], new_option[2], new_option[3])
+        delta_timer = new_timer - finish_timer
+
+        if delta_timer < 0:
+            finish_timer = new_timer
+            option = new_option
+        else:
+            dice = np.exp(-delta_timer / temperature)
+            if np.random.rand() <= dice:
+                finish_timer = new_timer
+                option = new_option
+
+        if method == 1:
+            temperature = reverse_linear_cooling(ui.spinBox_temperature.value(), iterator)
+        else:
+            temperature = linear_cooling(ui.spinBox_temperature.value(), iterator)
+
+        if temperature <= ui.spinBox_temperature_stop.value():
+            break
+
+    total_timer = time.time() - timer
+    print("CPU1", task_mas1)
+    print("CPU2", task_mas2)
+    print("CPU3", task_mas3)
+    print("CPU4", task_mas4)
+    print("%s seconds" % finish_timer)
+    ui.label_1.setStyleSheet('color: rgb(255, 0, 0);')
+    ui.label_2.setStyleSheet('color: rgb(255, 0, 0);')
+    ui.label_3.setStyleSheet('color: rgb(255, 0, 0);')
+    ui.label_4.setStyleSheet('color: rgb(0, 255, 0);')
+    ui.label_5.setStyleSheet('color: rgb(255, 0, 0);')
+    print("Working hours %s seconds" % total_timer)
+    return finish_timer, total_timer
+
+
+# схема обратного линейного охлаждения
+def reverse_linear_cooling(current_temperature, iterator):
+    return current_temperature / iterator
+
+
+# схема линейного охлаждения
+def linear_cooling(current_temperature, iterator):
+    return max(0.1, current_temperature - 0.1 * iterator)
+
+
+def option_changes(option):
+    new_option = [{}, {}, {}, {}]
+    dice = random.randint(0, len(global_labels) - 1)
+    for nodes in range(len(global_labels)):
+        for i in range(4):
+            for number in option[i]:
+                if number == nodes:
+                    if number == dice:
+                        cpu = i
+                        while (cpu == i):
+                            cpu = random.randint(0, 3)
+                        if cpu == 0:
+                            new_option[0][number] = option[i][number]
+                        elif cpu == 1:
+                            new_option[1][number] = option[i][number]
+                        elif cpu == 2:
+                            new_option[2][number] = option[i][number]
+                        else:
+                            new_option[3][number] = option[i][number]
+                    else:
+                        new_option[i][number] = option[i][number]
+    return new_option
+
+
 def full_test():
     book = xlwt.Workbook(encoding="utf-8")
     sheet = book.add_sheet("Full test")
@@ -304,9 +454,16 @@ def full_test():
     sheet.write(0, 1, "Scientific poke method (Total time)")
     sheet.write(0, 2, "Searching for options (Best time)")
     sheet.write(0, 3, "Searching for options (Total time)")
-    sheet.write(0, 4, "Evolutionary method (Best time)")
-    sheet.write(0, 5, "Evolutionary method (Total time)")
+    sheet.write(0, 4, "Evolutionary method (Roulette method)(Best time)")
+    sheet.write(0, 5, "Evolutionary method (Roulette method)(Total time)")
+    sheet.write(0, 6, "Evolutionary method (Ranking method)(Best time)")
+    sheet.write(0, 7, "Evolutionary method (Ranking method)(Total time)")
+    sheet.write(0, 8, "Annealing method (Reverse linear cooling)(Best time)")
+    sheet.write(0, 9, "Annealing method (Reverse linear cooling)(Total time)")
+    sheet.write(0, 10, "Annealing method (Linear cooling)(Best time)")
+    sheet.write(0, 11, "Annealing method (Linear cooling)(Total time)")
 
+    all_time = time.time()
     for graphs in range(ui.spinBox_number_of_graphs.value()):
         start_canvas()
 
@@ -318,15 +475,65 @@ def full_test():
         sheet.write(graphs + 1, 2, best_time)
         sheet.write(graphs + 1, 3, total_timer)
 
-        best_time, total_timer = evolutionary_method()
+        best_time, total_timer = evolutionary_method(1)
         sheet.write(graphs + 1, 4, best_time)
         sheet.write(graphs + 1, 5, total_timer)
+
+        best_time, total_timer = evolutionary_method(2)
+        sheet.write(graphs + 1, 6, best_time)
+        sheet.write(graphs + 1, 7, total_timer)
+
+        best_time, total_timer = annealing_method(1)
+        sheet.write(graphs + 1, 8, best_time)
+        sheet.write(graphs + 1, 9, total_timer)
+
+        best_time, total_timer = annealing_method(2)
+        sheet.write(graphs + 1, 10, best_time)
+        sheet.write(graphs + 1, 11, total_timer)
+
+    all_time = time.time() - all_time
+    print(all_time)
+
+    sheet.write(ui.spinBox_number_of_graphs.value() + 1, 0,
+                xlwt.Formula("AVERAGE(A2:A" + str(ui.spinBox_number_of_graphs.value() + 1) + ")"))
+    sheet.write(ui.spinBox_number_of_graphs.value() + 1, 1,
+                xlwt.Formula("AVERAGE(B2:B" + str(ui.spinBox_number_of_graphs.value() + 1) + ")"))
+    sheet.write(ui.spinBox_number_of_graphs.value() + 1, 2,
+                xlwt.Formula("AVERAGE(C2:C" + str(ui.spinBox_number_of_graphs.value() + 1) + ")"))
+    sheet.write(ui.spinBox_number_of_graphs.value() + 1, 3,
+                xlwt.Formula("AVERAGE(D2:D" + str(ui.spinBox_number_of_graphs.value() + 1) + ")"))
+    sheet.write(ui.spinBox_number_of_graphs.value() + 1, 4,
+                xlwt.Formula("AVERAGE(E2:E" + str(ui.spinBox_number_of_graphs.value() + 1) + ")"))
+    sheet.write(ui.spinBox_number_of_graphs.value() + 1, 5,
+                xlwt.Formula("AVERAGE(F2:F" + str(ui.spinBox_number_of_graphs.value() + 1) + ")"))
+    sheet.write(ui.spinBox_number_of_graphs.value() + 1, 6,
+                xlwt.Formula("AVERAGE(G2:G" + str(ui.spinBox_number_of_graphs.value() + 1) + ")"))
+    sheet.write(ui.spinBox_number_of_graphs.value() + 1, 7,
+                xlwt.Formula("AVERAGE(H2:H" + str(ui.spinBox_number_of_graphs.value() + 1) + ")"))
+    sheet.write(ui.spinBox_number_of_graphs.value() + 1, 8,
+                xlwt.Formula("AVERAGE(I2:I" + str(ui.spinBox_number_of_graphs.value() + 1) + ")"))
+    sheet.write(ui.spinBox_number_of_graphs.value() + 1, 9,
+                xlwt.Formula("AVERAGE(J2:J" + str(ui.spinBox_number_of_graphs.value() + 1) + ")"))
+    sheet.write(ui.spinBox_number_of_graphs.value() + 1, 10,
+                xlwt.Formula("AVERAGE(K2:K" + str(ui.spinBox_number_of_graphs.value() + 1) + ")"))
+    sheet.write(ui.spinBox_number_of_graphs.value() + 1, 11,
+                xlwt.Formula("AVERAGE(L2:L" + str(ui.spinBox_number_of_graphs.value() + 1) + ")"))
+
+    sheet.write(0, 12, xlwt.Formula(
+        "AVERAGE(A" + str(ui.spinBox_number_of_graphs.value() + 2) +
+                ";C" + str(ui.spinBox_number_of_graphs.value() + 2) +
+                ";E" + str(ui.spinBox_number_of_graphs.value() + 2) +
+                ";G" + str(ui.spinBox_number_of_graphs.value() + 2) +
+                ";I" + str(ui.spinBox_number_of_graphs.value() + 2) +
+                ";K" + str(ui.spinBox_number_of_graphs.value() + 2) + ")"))
+
     book.save("Full test.xls")
 
     ui.label_1.setStyleSheet('color: rgb(255, 0, 0);')
     ui.label_2.setStyleSheet('color: rgb(255, 0, 0);')
     ui.label_3.setStyleSheet('color: rgb(255, 0, 0);')
-    ui.label_4.setStyleSheet('color: rgb(0, 255, 0);')
+    ui.label_4.setStyleSheet('color: rgb(255, 0, 0);')
+    ui.label_5.setStyleSheet('color: rgb(0, 255, 0);')
 
 
 def start_canvas():
@@ -351,7 +558,10 @@ if __name__ == '__main__':
 
     ui.pushButton_poke.clicked.connect(scientific_poke_method)
     ui.pushButton_options.clicked.connect(searching_for_options)
-    ui.pushButton_evolution.clicked.connect(evolutionary_method)
+    ui.pushButton_roulette.clicked.connect(lambda: evolutionary_method(1))
+    ui.pushButton_ranging.clicked.connect(lambda: evolutionary_method(2))
+    ui.pushButton_reverse.clicked.connect(lambda: annealing_method(1))
+    ui.pushButton_linear.clicked.connect(lambda: annealing_method(2))
     ui.pushButton.clicked.connect(start_canvas)
     ui.pushButton_full_test.clicked.connect(full_test)
     #Конец кода
