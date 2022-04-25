@@ -6,419 +6,879 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1021</width>
-    <height>431</height>
+    <width>561</width>
+    <height>622</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>resource allocation </string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="verticalLayoutWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>9</x>
-      <y>9</y>
-      <width>321</width>
-      <height>281</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_graph"/>
-   </widget>
-   <widget class="QGroupBox" name="groupBox_4">
-    <property name="geometry">
-     <rect>
-      <x>338</x>
-      <y>8</y>
-      <width>331</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Scientific poke method</string>
-    </property>
-    <widget class="QWidget" name="gridLayoutWidget_4">
-     <property name="geometry">
-      <rect>
-       <x>9</x>
-       <y>19</y>
-       <width>311</width>
-       <height>60</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_4">
-      <item row="0" column="0">
-       <widget class="QPushButton" name="pushButton_poke">
-        <property name="text">
-         <string>Start</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="label_1">
-        <property name="font">
-         <font>
-          <pointsize>36</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>•</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="groupBox_5">
-    <property name="geometry">
-     <rect>
-      <x>680</x>
-      <y>10</y>
-      <width>331</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Searching for options </string>
-    </property>
-    <widget class="QWidget" name="gridLayoutWidget_5">
-     <property name="geometry">
-      <rect>
-       <x>9</x>
-       <y>19</y>
-       <width>311</width>
-       <height>60</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_5">
-      <item row="0" column="0">
-       <widget class="QPushButton" name="pushButton_options">
-        <property name="text">
-         <string>Start</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="label_2">
-        <property name="font">
-         <font>
-          <pointsize>36</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>•</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="groupBox_3">
-    <property name="geometry">
-     <rect>
-      <x>340</x>
-      <y>100</y>
-      <width>331</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Evolutionary method</string>
-    </property>
-    <widget class="QWidget" name="gridLayoutWidget_3">
-     <property name="geometry">
-      <rect>
-       <x>9</x>
-       <y>19</y>
-       <width>311</width>
-       <height>112</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_name_3">
-        <property name="text">
-         <string>number of generations</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QLabel" name="label_name_4">
-        <property name="text">
-         <string>mutation probability</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QSpinBox" name="spinBox_number_of_generations"/>
-      </item>
-      <item row="1" column="3">
-       <widget class="QDoubleSpinBox" name="doubleSpinBox_mutation_probability">
-        <property name="maximum">
-         <double>1.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_number_of_individuals">
-        <property name="text">
-         <string>number of individuals </string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QSpinBox" name="spinBox_number_of_individuals"/>
-      </item>
-      <item row="0" column="0">
-       <widget class="QPushButton" name="pushButton_roulette">
-        <property name="text">
-         <string>Start roulette</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QPushButton" name="pushButton_ranging">
-        <property name="text">
-         <string>Start ranging</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2" colspan="2">
-       <widget class="QLabel" name="label_3">
-        <property name="font">
-         <font>
-          <pointsize>36</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>•</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="groupBox_2">
-    <property name="geometry">
-     <rect>
-      <x>680</x>
-      <y>100</y>
-      <width>331</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Annealing method</string>
-    </property>
-    <widget class="QWidget" name="gridLayoutWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>9</x>
-       <y>19</y>
-       <width>311</width>
-       <height>112</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_2">
-      <item row="1" column="3">
-       <widget class="QSpinBox" name="spinBox_iteration">
-        <property name="maximum">
-         <number>999999</number>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QSpinBox" name="spinBox_temperature">
-        <property name="maximum">
-         <number>9999</number>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_temperature">
-        <property name="text">
-         <string>temperature</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QLabel" name="label_temperature_2">
-        <property name="text">
-         <string>iteration</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QSpinBox" name="spinBox_temperature_stop">
-        <property name="maximum">
-         <number>9999</number>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_temperature_stop">
-        <property name="text">
-         <string>temperature stop</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QPushButton" name="pushButton_reverse">
-        <property name="text">
-         <string>Start reverse</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QPushButton" name="pushButton_linear">
-        <property name="text">
-         <string>Start linear</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2" colspan="2">
-       <widget class="QLabel" name="label_4">
-        <property name="font">
-         <font>
-          <pointsize>36</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>•</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </widget>
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>240</y>
-      <width>671</width>
-      <height>141</height>
+      <x>10</x>
+      <y>470</y>
+      <width>541</width>
+      <height>111</height>
      </rect>
     </property>
     <property name="title">
      <string>Full test</string>
     </property>
-    <widget class="QWidget" name="gridLayoutWidget">
+    <widget class="QLabel" name="label_full_test">
      <property name="geometry">
       <rect>
-       <x>9</x>
-       <y>19</y>
-       <width>641</width>
-       <height>115</height>
+       <x>500</x>
+       <y>20</y>
+       <width>31</width>
+       <height>31</height>
       </rect>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <widget class="QPushButton" name="pushButton_full_test">
-        <property name="text">
-         <string>Start</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QSpinBox" name="spinBox_number_of_graphs">
-        <property name="maximum">
-         <number>9999</number>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="label_5">
-        <property name="font">
-         <font>
-          <pointsize>36</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="text">
-         <string>•</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_number_of_graphs">
-        <property name="text">
-         <string>number of graphs</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <property name="font">
+      <font>
+       <pointsize>36</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="text">
+      <string>•</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="spinBox_number_of_tests">
+     <property name="geometry">
+      <rect>
+       <x>105</x>
+       <y>69</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>9999</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_number_of_tests">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>number of tests</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_full_test">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>491</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Start</string>
+     </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="gridLayoutWidget_6">
+   <widget class="QGroupBox" name="groupBox_methods">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>290</y>
-      <width>321</width>
-      <height>81</height>
+      <y>170</y>
+      <width>541</width>
+      <height>301</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout_6">
-     <item row="1" column="2">
-      <widget class="QLabel" name="label_name_2">
+    <property name="title">
+     <string>Methods</string>
+    </property>
+    <widget class="QGroupBox" name="groupBox_scientific_poke_method">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>151</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Scientific poke method</string>
+     </property>
+     <widget class="QPushButton" name="pushButton_scientific_poke_method">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_scientific_poke_method">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>10</y>
+        <width>21</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>36</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>•</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_scientific_poke_method">
+      <property name="geometry">
+       <rect>
+        <x>9</x>
+        <y>19</y>
+        <width>21</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_evolutionary_method">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>521</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Evolutionary method</string>
+     </property>
+     <widget class="QPushButton" name="pushButton_evolutionary_method">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_evolutionary_method">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>21</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_evolutionary_method">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>10</y>
+        <width>21</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>36</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>•</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_name_number_of_generations">
+      <property name="geometry">
+       <rect>
+        <x>148</x>
+        <y>19</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>number of generations</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBox_number_of_generations">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>20</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_number_of_individuals">
+      <property name="geometry">
+       <rect>
+        <x>343</x>
+        <y>19</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>number of individuals </string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBox_number_of_individuals">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>19</y>
+        <width>61</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_name_mutation_probability">
+      <property name="geometry">
+       <rect>
+        <x>13</x>
+        <y>59</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>mutation probability</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="doubleSpinBox_mutation_probability">
+      <property name="geometry">
+       <rect>
+        <x>118</x>
+        <y>59</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <double>1.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_name_mutation_probability_2">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>60</y>
+        <width>51</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>selection</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_selection">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>60</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <item>
        <property name="text">
-        <string>connection probability</string>
+        <string>Roulette</string>
        </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_name_1">
+      </item>
+      <item>
        <property name="text">
-        <string>count of nodes</string>
+        <string>Ranging</string>
        </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QSpinBox" name="spinBox_count_of_tasks"/>
-     </item>
-     <item row="1" column="3">
-      <widget class="QDoubleSpinBox" name="doubleSpinBox_connection_probability">
-       <property name="maximum">
-        <double>1.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0" colspan="4">
-      <widget class="QPushButton" name="pushButton">
+      </item>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_searching_for_options">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>20</y>
+       <width>151</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Searching for options </string>
+     </property>
+     <widget class="QCheckBox" name="checkBox_searching_for_options">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>21</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_searching_for_options">
+      <property name="geometry">
+       <rect>
+        <x>31</x>
+        <y>22</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_searching_for_options">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>7</y>
+        <width>31</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>36</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>•</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_annealing_method">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>190</y>
+       <width>521</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Annealing method</string>
+     </property>
+     <widget class="QPushButton" name="pushButton_annealing_method">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Start</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_annealing_method">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>21</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_annealing_method">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>10</y>
+        <width>21</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>36</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>•</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_name_temperature">
+      <property name="geometry">
+       <rect>
+        <x>148</x>
+        <y>19</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>temperature</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBox_temperature">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>20</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>9999</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_number_of_iterations">
+      <property name="geometry">
+       <rect>
+        <x>303</x>
+        <y>19</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>number of iterations</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBox_number_of_iterations">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>19</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>9999</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_name_temperature_stop">
+      <property name="geometry">
+       <rect>
+        <x>13</x>
+        <y>59</y>
+        <width>111</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>temperature stop</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_name_cooling">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>60</y>
+        <width>51</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>cooling</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox_cooling">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>60</y>
+        <width>131</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <item>
        <property name="text">
-        <string>Generate Graph</string>
+        <string>Reverse linear cooling</string>
        </property>
-      </widget>
+      </item>
+      <item>
+       <property name="text">
+        <string>Linear cooling</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QSpinBox" name="spinBox_temperature_stop">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>60</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>9999</number>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_system_settings">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>541</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>System settings</string>
+    </property>
+    <widget class="QLabel" name="label_name_number_of_devices">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>number of devices</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="spinBox_number_of_devices">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>20</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>10</number>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="spinBox_number_of_processors">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>20</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>10</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_name_number_of_processors">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>20</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>number of processors</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_name_communication_type">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>60</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>communication type</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_throughput">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>60</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>10 Mbps</string>
+      </property>
      </item>
-    </layout>
+     <item>
+      <property name="text">
+       <string>11 Mbps</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>12 Mbps</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>13 Mbps</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>14 Mbps</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>15 Mbps</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>16 Mbps</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>17 Mbps</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>18 Mbps</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>19 Mbps</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>20 Mbps</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="label_name_throughput">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>throughput</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_communication_type">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>60</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>Mesh topology</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Passive star</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="label_name_device_memory">
+     <property name="geometry">
+      <rect>
+       <x>380</x>
+       <y>20</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string> device memory</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_device_memory">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>20</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>10 Mb</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>20 Mb</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>30 Mb</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>40 Mb</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>50 Mb</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>60 Mb</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>70 Mb</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>80 Mb</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>90 Mb</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>100 Mb</string>
+      </property>
+     </item>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_graph_settings">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>110</y>
+      <width>541</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Graph settings</string>
+    </property>
+    <widget class="QLabel" name="label_name_count_of_nodes">
+     <property name="geometry">
+      <rect>
+       <x>8</x>
+       <y>20</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>count of nodes</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="spinBox_count_of_nodes">
+     <property name="geometry">
+      <rect>
+       <x>92</x>
+       <y>20</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_name_connection_probability">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>20</y>
+       <width>111</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>connection probability</string>
+     </property>
+    </widget>
+    <widget class="QDoubleSpinBox" name="doubleSpinBox_connection_probability">
+     <property name="geometry">
+      <rect>
+       <x>288</x>
+       <y>20</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <double>1.000000000000000</double>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -426,7 +886,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1021</width>
+     <width>561</width>
      <height>21</height>
     </rect>
    </property>

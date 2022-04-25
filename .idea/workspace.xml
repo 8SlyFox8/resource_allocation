@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e0c8dbf9-9905-4d00-abed-cf2a52f180ec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graph_construction.py" beforeDir="false" afterPath="$PROJECT_DIR$/graph_construction.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_window.ui" beforeDir="false" afterPath="$PROJECT_DIR$/main_window.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource allocation.py" beforeDir="false" afterPath="$PROJECT_DIR$/resource allocation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource allocation.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +43,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.resource allocation">
+  <component name="RunManager" selected="Python.resource_allocation">
     <configuration name="123" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="resource allocation" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -150,8 +151,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.resource allocation" />
         <item itemvalue="Python.resource_allocation" />
+        <item itemvalue="Python.resource allocation" />
         <item itemvalue="Python.123" />
         <item itemvalue="Python.graph_construction" />
         <item itemvalue="Python.Graph construction" />
@@ -170,6 +171,16 @@
       <updated>1644406552546</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -196,8 +207,8 @@
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="len(labels)" />
-        <watch expression="len(task_mas1) + len(task_mas2) + len(task_mas3) + len(task_mas4)" />
+        <watch expression="index_options" />
+        <watch expression="systems" />
       </configuration>
     </watches-manager>
   </component>
