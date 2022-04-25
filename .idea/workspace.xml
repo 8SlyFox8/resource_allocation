@@ -3,10 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e0c8dbf9-9905-4d00-abed-cf2a52f180ec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graph_construction.py" beforeDir="false" afterPath="$PROJECT_DIR$/graph_construction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_window.ui" beforeDir="false" afterPath="$PROJECT_DIR$/main_window.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource allocation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/annealing_method.py" beforeDir="false" afterPath="$PROJECT_DIR$/annealing_method.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evolutionary_method.py" beforeDir="false" afterPath="$PROJECT_DIR$/evolutionary_method.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource_allocation.py" beforeDir="false" afterPath="$PROJECT_DIR$/resource_allocation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scientific_poke_method.py" beforeDir="false" afterPath="$PROJECT_DIR$/scientific_poke_method.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/searching_for_options.py" beforeDir="false" afterPath="$PROJECT_DIR$/searching_for_options.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system.py" beforeDir="false" afterPath="$PROJECT_DIR$/system.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system_operation.py" beforeDir="false" afterPath="$PROJECT_DIR$/system_operation.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -197,6 +200,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/system_operation.py</url>
+          <line>124</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -207,8 +217,7 @@
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="index_options" />
-        <watch expression="systems" />
+        <watch expression="gateways_memory" />
       </configuration>
     </watches-manager>
   </component>

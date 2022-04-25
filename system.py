@@ -30,4 +30,7 @@ def mesh_topology(number_of_devices):
 
 
 def passive_star(number_of_devices):
-    print("Don't work!")
+    connection = set()
+    for combination in range(number_of_devices):
+        connection.add((-1, combination))
+    return connection

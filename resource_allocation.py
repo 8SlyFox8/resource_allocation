@@ -27,7 +27,8 @@ def beginning_of_work(method):
                                            systems, gateways, gateways_memory,
                                            ui.comboBox_device_memory.currentIndex(),
                                            ui.comboBox_throughput.currentIndex(),
-                                           labels_memory, labels_speed)
+                                           labels_memory, labels_speed,
+                                           ui.comboBox_communication_type.currentIndex())
         total_timer = time.time() - timer
         print("%s seconds" % best_time)
         print("Working hours %s seconds" % total_timer)
@@ -44,7 +45,8 @@ def beginning_of_work(method):
                                           systems, gateways, gateways_memory,
                                           ui.comboBox_device_memory.currentIndex(),
                                           ui.comboBox_throughput.currentIndex(),
-                                          labels_memory, labels_speed)
+                                          labels_memory, labels_speed,
+                                          ui.comboBox_communication_type.currentIndex())
         total_timer = time.time() - timer
         print("%s seconds" % best_time)
         print("Working hours %s seconds" % total_timer)
@@ -65,7 +67,8 @@ def beginning_of_work(method):
                                            ui.spinBox_number_of_generations.value(),
                                            ui.spinBox_number_of_individuals.value(),
                                            ui.doubleSpinBox_mutation_probability.value(),
-                                           ui.comboBox_selection.currentIndex())
+                                           ui.comboBox_selection.currentIndex(),
+                                        ui.comboBox_communication_type.currentIndex())
         total_timer = time.time() - timer
         print("%s seconds" % best_time)
         print("Working hours %s seconds" % total_timer)
@@ -77,16 +80,17 @@ def beginning_of_work(method):
     elif method == 4:
         timer = time.time()
         best_time = annealing_method(ui.spinBox_number_of_devices.value(),
-                                        ui.spinBox_number_of_processors.value(),
-                                        labels, connection,
-                                        systems, gateways, gateways_memory,
-                                        ui.comboBox_device_memory.currentIndex(),
-                                        ui.comboBox_throughput.currentIndex(),
-                                        labels_memory, labels_speed,
-                                        ui.spinBox_temperature.value(),
-                                        ui.spinBox_temperature_stop.value(),
-                                        ui.spinBox_number_of_iterations.value(),
-                                        ui.comboBox_cooling.currentIndex())
+                                     ui.spinBox_number_of_processors.value(),
+                                     labels, connection,
+                                     systems, gateways, gateways_memory,
+                                     ui.comboBox_device_memory.currentIndex(),
+                                     ui.comboBox_throughput.currentIndex(),
+                                     labels_memory, labels_speed,
+                                     ui.spinBox_temperature.value(),
+                                     ui.spinBox_temperature_stop.value(),
+                                     ui.spinBox_number_of_iterations.value(),
+                                     ui.comboBox_cooling.currentIndex(),
+                                     ui.comboBox_communication_type.currentIndex())
         total_timer = time.time() - timer
         print("%s seconds" % best_time)
         print("Working hours %s seconds" % total_timer)
@@ -211,7 +215,8 @@ def data_collection(labels, connection, systems, gateways, gateways_memory):
                                                systems, gateways, gateways_memory,
                                                ui.comboBox_device_memory.currentIndex(),
                                                ui.comboBox_throughput.currentIndex(),
-                                               labels_memory, labels_speed)
+                                               labels_memory, labels_speed,
+                                               ui.comboBox_communication_type.currentIndex())
             total_timer = time.time() - timer
             if best_time == -1:
                 sheet.write(graphs + 3, 0, "")
@@ -228,7 +233,8 @@ def data_collection(labels, connection, systems, gateways, gateways_memory):
                                               systems, gateways, gateways_memory,
                                               ui.comboBox_device_memory.currentIndex(),
                                               ui.comboBox_throughput.currentIndex(),
-                                              labels_memory, labels_speed)
+                                              labels_memory, labels_speed,
+                                              ui.comboBox_communication_type.currentIndex())
             total_timer = time.time() - timer
             if best_time == -1:
                 sheet.write(graphs + 3, 2, "")
@@ -249,7 +255,8 @@ def data_collection(labels, connection, systems, gateways, gateways_memory):
                                             ui.spinBox_number_of_generations.value(),
                                             ui.spinBox_number_of_individuals.value(),
                                             ui.doubleSpinBox_mutation_probability.value(),
-                                            0)
+                                            0,
+                                            ui.comboBox_communication_type.currentIndex())
             total_timer = time.time() - timer
             if best_time == -1:
                 sheet.write(graphs + 3, 4, "")
@@ -269,7 +276,8 @@ def data_collection(labels, connection, systems, gateways, gateways_memory):
                                             ui.spinBox_number_of_generations.value(),
                                             ui.spinBox_number_of_individuals.value(),
                                             ui.doubleSpinBox_mutation_probability.value(),
-                                            1)
+                                            1,
+                                            ui.comboBox_communication_type.currentIndex())
             total_timer = time.time() - timer
             if best_time == -1:
                 sheet.write(graphs + 3, 6, "")
@@ -290,7 +298,8 @@ def data_collection(labels, connection, systems, gateways, gateways_memory):
                                          ui.spinBox_temperature.value(),
                                          ui.spinBox_temperature_stop.value(),
                                          ui.spinBox_number_of_iterations.value(),
-                                         0)
+                                         0,
+                                         ui.comboBox_communication_type.currentIndex())
             total_timer = time.time() - timer
             if best_time == -1:
                 sheet.write(graphs + 3, 8, "")
@@ -310,7 +319,8 @@ def data_collection(labels, connection, systems, gateways, gateways_memory):
                                          ui.spinBox_temperature.value(),
                                          ui.spinBox_temperature_stop.value(),
                                          ui.spinBox_number_of_iterations.value(),
-                                         1)
+                                         1,
+                                         ui.comboBox_communication_type.currentIndex())
             total_timer = time.time() - timer
             if best_time == -1:
                 sheet.write(graphs + 3, 10, "")

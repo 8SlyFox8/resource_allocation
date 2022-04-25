@@ -9,7 +9,8 @@ def search_for_a_winner(current_time, best_time):
     return best_time
 
 
-def system_operation(connection, systems, gateways, gateways_memory, device_memory, throughput, labels_memory, labels_speed):
+def system_operation(connection, systems, gateways, gateways_memory, device_memory, throughput, labels_memory,
+                     labels_speed, communication_type):
     link_list = connection.copy()
     distribution = copy.deepcopy(systems)
     finish_timer = 0
@@ -118,7 +119,8 @@ def system_operation(connection, systems, gateways, gateways_memory, device_memo
                         if task in distribution[system][processor]:
                             del distribution[system][processor][task]
 
-            find_connect(task, link_list, systems, gateways, gateways_memory, task_in_gateways_memory, labels_speed)
+            find_connect(task, link_list, systems, gateways, gateways_memory, task_in_gateways_memory, labels_speed,
+                         communication_type)
 
         if counter == len(distribution)*len(distribution[0]):
             exitflag1 = True
@@ -131,7 +133,8 @@ def system_operation(connection, systems, gateways, gateways_memory, device_memo
     return finish_timer
 
 
-def find_connect(current_task, link_list, systems, gateways, gateways_memory, task_in_gateways_memory, labels_speed):
+def find_connect(current_task, link_list, systems, gateways, gateways_memory, task_in_gateways_memory, labels_speed,
+                 communication_type):
     current_system = -1
     for system in range(len(systems)):
         for processor in range(len(systems[system])):
@@ -149,19 +152,34 @@ def find_connect(current_task, link_list, systems, gateways, gateways_memory, ta
                                 find_system = system
                                 if find_system != current_system:
                                     for gateway in gateways:
-                                        if gateways[gateway][0] == current_system \
-                                                and gateways[gateway][1] == find_system:
-                                            for task_speed in labels_speed:
-                                                if current_task == task_speed:
-                                                    gateways_memory[gateway][current_task] = labels_speed[task_speed]
-                                            task_in_gateways_memory.append(current_task)
+                                        if communication_type == 0:
+                                            if gateways[gateway][0] == current_system \
+                                                    and gateways[gateway][1] == find_system:
+                                                for task_speed in labels_speed:
+                                                    if current_task == task_speed:
+                                                        gateways_memory[gateway][current_task] = labels_speed[task_speed]
+                                                task_in_gateways_memory.append(current_task)
 
-                                        elif gateways[gateway][1] == current_system \
-                                                and gateways[gateway][0] == find_system:
-                                            for task_speed in labels_speed:
-                                                if current_task == task_speed:
-                                                    gateways_memory[gateway][current_task] = labels_speed[task_speed]
-                                            task_in_gateways_memory.append(current_task)
+                                            elif gateways[gateway][1] == current_system \
+                                                    and gateways[gateway][0] == find_system:
+                                                for task_speed in labels_speed:
+                                                    if current_task == task_speed:
+                                                        gateways_memory[gateway][current_task] = labels_speed[task_speed]
+                                                task_in_gateways_memory.append(current_task)
+                                        else:
+                                            if gateways[gateway][0] == -1 \
+                                                    and gateways[gateway][1] == find_system:
+                                                for task_speed in labels_speed:
+                                                    if current_task == task_speed:
+                                                        gateways_memory[gateway][current_task] = labels_speed[task_speed]
+                                                task_in_gateways_memory.append(current_task)
+
+                                            elif gateways[gateway][1] == -1 \
+                                                    and gateways[gateway][0] == find_system:
+                                                for task_speed in labels_speed:
+                                                    if current_task == task_speed:
+                                                        gateways_memory[gateway][current_task] = labels_speed[task_speed]
+                                                task_in_gateways_memory.append(current_task)
 
     exitflag3 = False
     while exitflag3 != True:

@@ -6,7 +6,8 @@ def searching_for_options(number_of_devices, number_of_processors,
                           labels, connection,
                           systems, gateways, gateways_memory,
                           device_memory, throughput,
-                          labels_memory, labels_speed):
+                          labels_memory, labels_speed,
+                          communication_type):
     best_time = -1
     all_options = [[[] for processor in range(number_of_devices*number_of_processors)] for device in range(len(labels))]
     indexes = [0 for device in range(len(labels))]
@@ -36,7 +37,8 @@ def searching_for_options(number_of_devices, number_of_processors,
                             option[system][processor][number] = labels[number]
 
         finish_timer = system_operation(connection, option, gateways, gateways_memory,
-                                        device_memory, throughput, labels_memory, labels_speed)
+                                        device_memory, throughput, labels_memory, labels_speed,
+                                        communication_type)
         best_time = search_for_a_winner(finish_timer, best_time)
 
         index = 0

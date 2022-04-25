@@ -7,7 +7,8 @@ def scientific_poke_method(number_of_devices, number_of_processors,
                            labels, connection,
                            systems, gateways, gateways_memory,
                            device_memory, throughput,
-                           labels_memory, labels_speed):
+                           labels_memory, labels_speed,
+                           communication_type):
     best_time = -1
     poke = copy.deepcopy(systems)
     for number in range(len(labels)):
@@ -19,7 +20,8 @@ def scientific_poke_method(number_of_devices, number_of_processors,
                     poke[system][processor][number] = labels[number]
 
     finish_timer = system_operation(connection, poke, gateways, gateways_memory,
-                                    device_memory, throughput, labels_memory, labels_speed)
+                                    device_memory, throughput, labels_memory, labels_speed,
+                                    communication_type)
     best_time = search_for_a_winner(finish_timer, best_time)
 
     return best_time

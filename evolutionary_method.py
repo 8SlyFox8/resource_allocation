@@ -8,7 +8,8 @@ def evolutionary_method(number_of_devices, number_of_processors,
                         systems, gateways, gateways_memory,
                         device_memory, throughput,
                         labels_memory, labels_speed,
-                        number_of_generations, number_of_individuals, mutation_probability, selection):
+                        number_of_generations, number_of_individuals, mutation_probability, selection,
+                        communication_type):
     best_time = -1
     individuals = []
     for individual in range(number_of_individuals):
@@ -17,7 +18,8 @@ def evolutionary_method(number_of_devices, number_of_processors,
         results = {}
         for individual in range(number_of_individuals):
             finish_timer = system_operation(connection, individuals[individual], gateways, gateways_memory,
-                                            device_memory, throughput, labels_memory, labels_speed)
+                                            device_memory, throughput, labels_memory, labels_speed,
+                                            communication_type)
             results[individual] = finish_timer
         if selection == 0:
             individuals = analysis_roulette(results, individuals, labels, systems, number_of_individuals)
@@ -26,7 +28,8 @@ def evolutionary_method(number_of_devices, number_of_processors,
         individuals = mutation(individuals, labels, systems, mutation_probability)
     for individual in range(number_of_individuals):
         finish_timer = system_operation(connection, individuals[individual], gateways, gateways_memory,
-                                        device_memory, throughput, labels_memory, labels_speed)
+                                        device_memory, throughput, labels_memory, labels_speed,
+                                        communication_type)
         best_time = search_for_a_winner(finish_timer, best_time)
     return best_time
 
