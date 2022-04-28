@@ -393,7 +393,7 @@ def annealing_method(method):
         if method == 1:
             temperature = reverse_linear_cooling(ui.spinBox_temperature.value(), iterator)
         else:
-            temperature = linear_cooling(ui.spinBox_temperature.value(), iterator)
+            temperature = linear_cooling(ui.spinBox_temperature.value(), iterator, ui.spinBox_iteration.value())
 
         if temperature <= ui.spinBox_temperature_stop.value():
             break
@@ -419,8 +419,8 @@ def reverse_linear_cooling(current_temperature, iterator):
 
 
 # схема линейного охлаждения
-def linear_cooling(current_temperature, iterator):
-    return max(0.1, current_temperature - 0.1 * iterator)
+def linear_cooling(current_temperature, iterator, number_of_iterations):
+    return current_temperature - (current_temperature/number_of_iterations) * iterator
 
 
 def option_changes(option):
